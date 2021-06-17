@@ -1,0 +1,38 @@
+{
+    "python.pythonPath": "venv/bin/python3",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "files.associations": {
+        "**/*.html": "html",
+        "**/templates/**/*.html": "django-html",
+        "**/templates/**/*": "django-txt",
+        "**/requirements{/**,*}.{txt,in}": "pip-requirements"
+    },
+    "emmet.includeLanguages": {
+        "django-html": "html"
+    },
+    "beautify.language": {
+        "html": ["django-html"]
+    },
+    "[django-html]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "HookyQR.beautify"
+    },
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": ["--line-length=119"],
+    "python.linting.flake8Args": ["--max-line-length=119", "--ignore=E501"],
+    "python.sortImports.args": ["--profile=black"],
+    "python.linting.flake8Enabled": true,
+    "python.linting.pylintEnabled": false,
+    "terminal.integrated.fontFamily": "'Cascadia Code PL'",
+    "terminal.integrated.fontSize": 15,
+    "[python]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        },
+        "editor.formatOnPaste": false,
+        "editor.formatOnSaveMode": "file"
+    },
+    "workbench.editor.enablePreview": false,
+    "python.languageServer": "Jedi"
+}
