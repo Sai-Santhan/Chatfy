@@ -1,5 +1,4 @@
 from django.http import JsonResponse
-from django.shortcuts import render
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -46,7 +45,7 @@ class JoinRoom(APIView):
         if code is not None:
             room_result = Room.objects.filter(code=code)
             if len(room_result) > 0:
-                room = room_result[0]
+                # room = room_result[0]
                 self.request.session["room_code"] = code
                 return Response({"message": "Room Joined!"}, status=status.HTTP_200_OK)
 
@@ -103,3 +102,16 @@ class UserInRoom(APIView):
 
         data = {"code": self.request.session.get("room_code")}
         return JsonResponse(data, status=status.HTTP_200_OK)
+
+
+class LeaveRoom(APIView):
+    def post(self, request, format=None):
+        if "room_code" in self.request.session:
+            self.request.session.pop("room_code")
+            host_id = self.request.session.session_key
+            room_results = Room.objects.filter(host=host_id)
+            if len(room_results) > 0:
+                room = room_results[0]
+                room.delete()
+
+        return Response({"Message": "Success"}, status=status.HTTP_200_OK)
